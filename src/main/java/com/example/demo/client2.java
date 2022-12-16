@@ -56,10 +56,21 @@ public class client2 {
     }
 
     public void sendmessage(){
+        System.out.println("sendmess");
         try {
             bufferedWriter.write(username);
             bufferedWriter.newLine();
             bufferedWriter.flush();
+            Message sen = new Message(3,"",": has connected");
+
+            sen.name=username;
+            System.out.println(sen.name);
+            objectOutputStream.writeObject(sen);
+            System.out.println("mess out");
+            objectOutputStream.flush();
+            //System.out.println("mess out");
+
+
 
             Scanner  scanner = new Scanner(se);
             while (socket.isConnected()){
@@ -115,15 +126,16 @@ public class client2 {
             @Override
             public void run() {
                 Object messagef;
+                System.out.println("listen2");
                 while (socket2.isConnected()){
                     try {
                         messagef =  objectInputStream.readObject();
-                        System.out.println(messagef);
+                        System.out.println("badd");
                         //objmes= (Message) objectInputStream.readObject();
                         if( messagef  instanceof Message){
                             serv.add((Message) messagef);
                             client2list.add((Message) messagef);
-                            System.out.println(serv.get(1).message);
+                            System.out.println(serv.get(0).message);
 
                         }
 
@@ -152,9 +164,11 @@ public class client2 {
         client2 client =new client2(socket1,username,socket2);
         client2list.add(new Message(1,"start","client"));
 
+        //client.listen();
+        client.listen2();
         client.listen();
        client.sendmessage();
-       client.listen2();
+
     }
 
 }

@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 //import static com.example.demo.ClientHand.serverView;
+import static com.example.demo.ClientHand.serverView;
 import static com.example.demo.client2.client2list;
 import static com.example.demo.client2.objmes;
 
@@ -91,6 +92,7 @@ public class chatController implements Initializable {
             throw new RuntimeException(e);
         }
         System.out.println("in");
+        System.out.println("this far");
         listView2.setCellFactory(new Callback<ListView<Message>, ListCell<Message>>() {
             @Override
             public ListCell<Message> call(ListView<Message> messageListView) {
@@ -145,9 +147,12 @@ public class chatController implements Initializable {
 
         scrool.setContent(vbox);
         vbox.getStyleClass().add("chatbox");
+        System.out.println("this far");
 
         listView.getItems().add(new Message(2,"jam","test message 1"));
         listView2.getItems().add(new Message(3,"ben","test message 2"));
+        listView2.getItems().addAll(serv);
+        listView2.getItems().addAll(serverView);
         //listView.getItems().add(new Message(2,"ken","test message 3"));
         //listView2.getItems().add(objmes);
         //listView.getItems().addAll(serv);
@@ -279,6 +284,11 @@ public class chatController implements Initializable {
         Socket socketc =new Socket("localhost",9080);
         Socket socket2 =new Socket("localhost",8080);
         client2 me = new client2(socketc,"hold", socket2);
+        me.listen2();
+        me.listen();
+        me.sendmessage();
+
+        System.out.println("serv conn");
     }
 
     @FXML

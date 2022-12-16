@@ -113,18 +113,34 @@ public class HelloController implements Initializable {
 
     public void switchrooms() throws IOException {
         room = (Stage) Stage.getWindows().get(0);
+        System.out.println("win");
 
 
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("chatview.fxml"));
-        Scene scene1 = new Scene(fxmlLoader.load(), 600, 600);
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        //Scene hold = new Scene(fxmlLoader.load(Objects.requireNonNull(HelloApplication.class.getResource("chatview.fxml")).openStream()));
+        System.out.println("win2");
+        //Scene scene1 = new Scene(fxmlLoader.load(), 600, 600);
+        Scene scene1 = new Scene(fxmlLoader.load(Objects.requireNonNull(HelloApplication.class.getResource("chatview.fxml")).openStream()));
+        System.out.println("win3");
         scene1.getStylesheets().add(Objects.requireNonNull(getClass().getResource("style.css")).toExternalForm());
+        System.out.println("win4");
 
 
         room.setScene((scene1));
+        System.out.println("win5");
         room.setTitle("Chat");
 
-        makeconn();
+        //makeconn();
         room.show();
+
+        Stage newWindow = new Stage();
+        newWindow.setTitle("New chat");
+//Create view from FXML
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("chatview.fxml"));
+//Set view in window
+        newWindow.setScene(new Scene(loader.load()));
+//Launch
+        newWindow.show();
 
 
     }
