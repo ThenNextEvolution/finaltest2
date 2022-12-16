@@ -1,0 +1,27 @@
+#vbox {
+
+      }
+
+#message.message{
+    -fx-font-size: 1.2em;
+    -fx-font-weight: bold;
+}
+.name {
+    -fx-font-size: 1.2em;
+    -fx-font-weight: bold;
+    -fx-text-fill: #444444;
+    -fx-effect: dropshadow( three-pass-box, rgba(0,0,0,0.4), 3, 0.0, 1, 1);
+
+}
+.mes {
+    -fx-font-size: .9em;
+    -fx-text-fill: #669900;
+    -fx-effect: dropshadow( three-pass-box, rgba(0,0,0,0.4), 3, 0.0, 1, 1);
+}
+.server{
+-fx-font-size: .9em;
+    -fx-text-fill: #669900;
+    -fx-effect: dropshadow( three-pass-box, rgba(0,0,0,0.4), 3, 0.0, 1, 1);
+    -
+
+}
