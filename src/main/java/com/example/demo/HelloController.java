@@ -116,11 +116,12 @@ public class HelloController implements Initializable {
         System.out.println("win");
 
 
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        //Scene hold = new Scene(fxmlLoader.load(Objects.requireNonNull(HelloApplication.class.getResource("chatview.fxml")).openStream()));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("chatview.fxml"));
+
+        Scene scene1 = new Scene(fxmlLoader.load(), 600, 600);
+
         System.out.println("win2");
-        //Scene scene1 = new Scene(fxmlLoader.load(), 600, 600);
-        Scene scene1 = new Scene(fxmlLoader.load(Objects.requireNonNull(HelloApplication.class.getResource("chatview.fxml")).openStream()));
+
         System.out.println("win3");
         scene1.getStylesheets().add(Objects.requireNonNull(getClass().getResource("style.css")).toExternalForm());
         System.out.println("win4");
@@ -132,6 +133,7 @@ public class HelloController implements Initializable {
 
         //makeconn();
         room.show();
+
 
         Stage newWindow = new Stage();
         newWindow.setTitle("New chat");

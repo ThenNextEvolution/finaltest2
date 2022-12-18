@@ -3,25 +3,26 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.chatController">
-   <children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.chatController">
 
-       <SplitPane dividerPositions="0.29797979797979796" layoutY="6.0" prefHeight="400.0" prefWidth="600.0">
-           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-               <ListView fx:id="listView" editable="true" layoutX="1.0" layoutY="76.0" prefHeight="176.0" prefWidth="175.0" AnchorPane.bottomAnchor="146.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="76.0" />
-               <ListView fx:id="listViews" layoutX="1.0" layoutY="261.0" prefHeight="138.0" prefWidth="175.0" />
-                <ListView fx:id="serv" layoutX="1.0" layoutY="-1.0" prefHeight="72.0" prefWidth="175.0" />
-                <Pane layoutX="-26.0" layoutY="73.0" prefHeight="259.0" prefWidth="386.0" />
-           </AnchorPane>
-           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="277.0" prefWidth="344.0">
-            <ScrollPane fx:id="scrool" layoutX="5.0" layoutY="3.0" prefHeight="206.0" prefWidth="377.0" />
+    <SplitPane dividerPositions="0.29797979797979796" layoutY="6.0" prefHeight="400.0" prefWidth="600.0">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+            <ListView fx:id="listView" editable="true" layoutX="1.0" layoutY="76.0" prefHeight="176.0" prefWidth="175.0"
+                      AnchorPane.bottomAnchor="146.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0"
+                      AnchorPane.topAnchor="76.0"/>
+            <ListView fx:id="listViews" layoutX="1.0" layoutY="261.0" prefHeight="138.0" prefWidth="175.0"/>
+            <ListView fx:id="chatview" layoutX="1.0" layoutY="-1.0" prefHeight="72.0" prefWidth="175.0"/>
+            <Pane layoutX="-26.0" layoutY="73.0" prefHeight="259.0" prefWidth="386.0"/>
+        </AnchorPane>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="277.0" prefWidth="344.0">
+         <ScrollPane fx:id="scrool" layoutX="5.0" layoutY="3.0" prefHeight="206.0" prefWidth="377.0"/>
 
-                     <AnchorPane layoutX="4.0" layoutY="245.0" prefHeight="259.0" prefWidth="379.0" />
-               <TextArea fx:id="inmes" layoutX="15.0" layoutY="298.0" prefHeight="86.0" prefWidth="327.0" />
-               <Button fx:id="Send" layoutX="349.0" layoutY="286.0" mnemonicParsing="false" onAction="#sendmessage" text="SEND" />
-           </AnchorPane>
-       </SplitPane>
-      <ListView fx:id="listView2" layoutX="11.0" layoutY="439.0" prefHeight="126.0" prefWidth="244.0" />
-   </children>
-
+            <AnchorPane layoutX="4.0" layoutY="245.0" prefHeight="259.0" prefWidth="379.0"/>
+            <TextArea fx:id="inmes" layoutX="15.0" layoutY="298.0" prefHeight="86.0" prefWidth="327.0"/>
+            <Button fx:id="Send" layoutX="349.0" layoutY="286.0" mnemonicParsing="false" onAction="#sendmessage"
+                    text="SEND"/>
+        </AnchorPane>
+    </SplitPane>
+    <ListView fx:id="listView2" layoutX="11.0" layoutY="439.0" prefHeight="126.0" prefWidth="244.0"/>
 </AnchorPane>

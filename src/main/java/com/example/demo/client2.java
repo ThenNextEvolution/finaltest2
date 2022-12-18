@@ -6,6 +6,7 @@ import javafx.scene.text.Text;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.Objects;
 import java.util.Scanner;
 
 import static com.example.demo.HelloController.*;
@@ -68,26 +69,27 @@ public class client2 {
             objectOutputStream.writeObject(sen);
             System.out.println("mess out");
             objectOutputStream.flush();
-            //System.out.println("mess out");
+            System.out.println("mess out2");
 
 
 
-            Scanner  scanner = new Scanner(se);
-            while (socket.isConnected()){
-                //if(!Objects.equals(se, null)){
-
-                bufferedWriter.write(username+": "+ se);
-                bufferedWriter.newLine();
-                bufferedWriter.flush();;//}
-                System.out.println("done");
-
-
-
-            }
+            //Scanner  scanner = new Scanner(se);
+//            while (socket.isConnected()){
+//                //if(!Objects.equals(se, null)){
+//
+//                bufferedWriter.write(username+": "+ se);
+//                bufferedWriter.newLine();
+//                bufferedWriter.flush();;//}
+//                System.out.println("done");
+//
+//
+//
+//            }
 
 
 
         } catch (Exception e) {
+            System.out.println("clse");
             closer(socket,bufferedReader,bufferedWriter);
         }
 
@@ -125,21 +127,31 @@ public class client2 {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Object messagef;
+                Message messagef;
                 System.out.println("listen2");
                 while (socket2.isConnected()){
+                    //System.out.println("sock 2");
                     try {
-                        messagef =  objectInputStream.readObject();
-                        System.out.println("badd");
+                        if (objectInputStream.available()!=0){
+                            try {
+                                messagef = (Message) objectInputStream.readObject();
+                            }
+                            catch (ClassNotFoundException e) {
+                                throw new RuntimeException(e);
+                            }
+
+
+                            System.out.println("badd");
                         //objmes= (Message) objectInputStream.readObject();
-                        if( messagef  instanceof Message){
+                        if(messagef != null ){
                             serv.add((Message) messagef);
                             client2list.add((Message) messagef);
                             System.out.println(serv.get(0).message);
+                            System.out.println("received");
 
-                        }
+                        }}
 
-                        System.out.println("received");
+                        //System.out.println("received");
 
 
 
@@ -148,27 +160,25 @@ public class client2 {
                         //System.out.println(msgfrom);
                     } catch (IOException e) {
                         closer(socket,bufferedReader,bufferedWriter);
-                    } catch (ClassNotFoundException e) {
-                        throw new RuntimeException(e);
                     }
                 }
             }
         }) .start();}
-    public static void  main(String[] args) throws IOException {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("username");
-        //String username= scanner.nextLine();
-        String username="user1";
-        Socket socket1 =new Socket("localhost",9080);
-        Socket socket2 = new Socket("localhost",8080);
-        client2 client =new client2(socket1,username,socket2);
-        client2list.add(new Message(1,"start","client"));
-
-        //client.listen();
-        client.listen2();
-        client.listen();
-       client.sendmessage();
-
-    }
+//    public static void  main(String[] args) throws IOException {
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("username");
+//        //String username= scanner.nextLine();
+//        String username="user1";
+//        Socket socket1 =new Socket("localhost",9080);
+//        Socket socket2 = new Socket("localhost",8080);
+//        client2 client =new client2(socket1,username,socket2);
+//        client2list.add(new Message(1,"start","client"));
+//
+//        //client.listen();
+//        client.listen2();
+//        client.listen();
+//       client.sendmessage();
+//
+//    }
 
 }

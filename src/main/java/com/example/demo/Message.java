@@ -2,7 +2,9 @@ package com.example.demo;
 
 import javafx.scene.Node;
 
-public class Message extends Node {
+import java.io.Serializable;
+
+public class Message extends Node implements Serializable {
     public String name;
     public String message;
     public   int idnum;

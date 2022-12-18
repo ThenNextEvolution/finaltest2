@@ -40,6 +40,7 @@ public class chatController implements Initializable {
     //@FXML
     public VBox vbox = new VBox();
     public ScrollPane scrool;
+    public ListView chatview;
     private List<Label> messages = new ArrayList<>();
 
 
@@ -86,11 +87,14 @@ public class chatController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         try {
             makeconn();
         } catch (IOException e) {
+            System.out.println("caught");
             throw new RuntimeException(e);
         }
+
         System.out.println("in");
         System.out.println("this far");
         listView2.setCellFactory(new Callback<ListView<Message>, ListCell<Message>>() {
@@ -147,12 +151,16 @@ public class chatController implements Initializable {
 
         scrool.setContent(vbox);
         vbox.getStyleClass().add("chatbox");
-        System.out.println("this far");
+        vbox.getChildren().addAll(serverView);
+        System.out.println("this far2");
 
         listView.getItems().add(new Message(2,"jam","test message 1"));
         listView2.getItems().add(new Message(3,"ben","test message 2"));
+        System.out.println("listview size"+listView2.getItems().size());
         listView2.getItems().addAll(serv);
+        System.out.println("serv size"+serverView.size());
         listView2.getItems().addAll(serverView);
+        System.out.println("listview size"+listView2.getItems().size());
         //listView.getItems().add(new Message(2,"ken","test message 3"));
         //listView2.getItems().add(objmes);
         //listView.getItems().addAll(serv);
@@ -162,6 +170,15 @@ public class chatController implements Initializable {
 
        // vbox.getChildren().addAll(listView);
         vbox.getChildren().addAll(listView2);
+
+        listView2.getItems().forEach(each ->{System.out.print(each.message);});
+        //refresh();
+        serverView.forEach(each->{System.out.print(each.message);System.out.println("next mess");});
+        System.out.println("pass");
+
+        vbox.getChildren().setAll(serverView);
+        System.out.println("refresh");
+
        // vbox.getChildren().add(new ListCell<>());
 
 
@@ -231,6 +248,20 @@ public class chatController implements Initializable {
         });
 
 
+
+
+    }
+    public void refresh(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    vbox.getChildren().setAll(serverView);
+                    System.out.println("refreash");
+                }
+            }
+        }).start();
+
     }
     public void makemes(Message me){
         mes.add(me);
@@ -280,14 +311,14 @@ public class chatController implements Initializable {
 
     }
     protected void makeconn() throws IOException {
+        System.out.println("connecting");
         Message message = new Message(2,"mary","hope this works");
         Socket socketc =new Socket("localhost",9080);
         Socket socket2 =new Socket("localhost",8080);
-        client2 me = new client2(socketc,"hold", socket2);
+        client2 me = new client2(socketc,"client2", socket2);
         me.listen2();
         me.listen();
         me.sendmessage();
-
         System.out.println("serv conn");
     }
 

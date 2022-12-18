@@ -31,7 +31,7 @@ public class ClientHand implements Runnable {
            String ser =  String.format("%s  has entered the chat",clientusername);
             System.out.println(ser);
 //
-//            serverView.getItems().add(new Message(0,"server","has entered the chat"));
+            serverView.add(new Message(0,"server","has entered the chat"));
 //            System.out.println("recALL");
 
             Message join = new Message(0, "","has entered the chat");
@@ -42,9 +42,11 @@ public class ClientHand implements Runnable {
             broadcasting("server: "+clientusername+ "  has entered the chat",join);
             System.out.println("sent join mess");
             Message bo = new Message(1,"server","has entered the chat");
+            System.out.println("dpone withbroad");
             serverView.add(bo);
+            System.out.println("cliethold size"+serverView.size());
 
-            //System.out.println(serverView.getItems().get(0).name);
+            System.out.println("yooooooooooo"+serverView.get(0).message);
 
         } catch (Exception e) {
             closer(socket,bufferedReader,bufferedWriter);
@@ -55,23 +57,23 @@ public class ClientHand implements Runnable {
     public void run() {
         messouts();
     String messagefromc;
-    while(socket.isConnected()){
-        try {
-            messagefromc = bufferedReader.readLine();
-            System.out.println("sock");
-            Message mess = (Message) objectInputStream.readObject();
-            broadcasting(messagefromc,mess);
-        } catch (IOException e) {
-            try {
-                closer(socket,bufferedReader,bufferedWriter);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-            break;
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
+//    while(socket.isConnected()){
+//        try {
+//            messagefromc = bufferedReader.readLine();
+//            System.out.println("sock");
+//            Message mess = (Message) objectInputStream.readObject();
+//            broadcasting(messagefromc,mess);
+//        } catch (IOException e) {
+//            try {
+//                closer(socket,bufferedReader,bufferedWriter);
+//            } catch (IOException ex) {
+//                throw new RuntimeException(ex);
+//            }
+//            break;
+//        } catch (ClassNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
     }
      public void messouts(){
         new Thread(new Runnable() {
@@ -117,15 +119,17 @@ public class ClientHand implements Runnable {
 
         for (ClientHand clientHand2:clientHands) {
             System.out.println("sending");
-            clientHand2.objectOutputStream.writeObject(new Message(0,"server"," connected"));
+            //clientHand2.objectOutputStream.writeObject(new Message(0,"server"," connected"));
             clientHand2.objectOutputStream.flush();
+            //System.out.println("flushed");
 
                 try { String nam = clientusername;
 //
                     serverView.add(message);
+                    System.out.println(serverView.size()+"size");
                     clientHand2.objectOutputStream.writeObject(message);
                     //clientHand2.objectOutputStream.writeObject(bo);
-                    clientHand2.objectOutputStream.flush();}
+                    clientHand2.objectOutputStream.flush();System.out.println("flushed");}
                 catch (IOException e) {
                     throw new RuntimeException(e);
                 }
