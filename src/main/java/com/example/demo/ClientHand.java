@@ -16,7 +16,8 @@ public class ClientHand implements Runnable {
     private String clientusername;
     private ObjectOutputStream objectOutputStream;
     private ObjectInputStream objectInputStream;
-    public static ObservableList<Message> serverView = FXCollections.observableArrayList();
+    public static ObservableList<Message> serverView;
+
 
     public ClientHand(Socket socket, Socket socket1) throws IOException {
         try {

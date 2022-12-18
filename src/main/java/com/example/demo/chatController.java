@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -151,17 +152,17 @@ public class chatController implements Initializable {
 
         scrool.setContent(vbox);
         vbox.getStyleClass().add("chatbox");
-        vbox.getChildren().addAll(serverView);
+        //vbox.getChildren().addAll(serverView);
         System.out.println("this far2");
 
         listView.getItems().add(new Message(2,"jam","test message 1"));
         listView2.getItems().add(new Message(3,"ben","test message 2"));
-        System.out.println("listview size"+listView2.getItems().size());
-        listView2.getItems().addAll(serv);
-        System.out.println("serv size"+serverView.size());
-        listView2.getItems().addAll(serverView);
-        System.out.println("listview size"+listView2.getItems().size());
-        //listView.getItems().add(new Message(2,"ken","test message 3"));
+        //System.out.println("listview size"+listView2.getItems().size());
+        //listView2.getItems().addAll(serv);
+        //System.out.println("serv size"+serverView.size());
+       // listView2.getItems().addAll(serverView);
+        //System.out.println("listview size"+listView2.getItems().size());
+        listView2.getItems().add(new Message(2,"ken","test message 3"));
         //listView2.getItems().add(objmes);
         //listView.getItems().addAll(serv);
         //roomList.add(new Message(0,"test","testing"));
@@ -171,13 +172,16 @@ public class chatController implements Initializable {
        // vbox.getChildren().addAll(listView);
         vbox.getChildren().addAll(listView2);
 
-        listView2.getItems().forEach(each ->{System.out.print(each.message);});
+        //listView2.getItems().forEach(each ->{System.out.print(each.message);});
         //refresh();
-        serverView.forEach(each->{System.out.print(each.message);System.out.println("next mess");});
+       // serverView.forEach(each->{System.out.print(each.message);System.out.println("next mess");});
         System.out.println("pass");
 
-        vbox.getChildren().setAll(serverView);
+       // vbox.getChildren().addAll(serverView);
         System.out.println("refresh");
+        //serverView.add(new Message(1,"test","op"));
+        //ListView<Message>  lister = new ListView<Message>(serverView);
+        //vbox.getChildren().addAll(listView2);
 
        // vbox.getChildren().add(new ListCell<>());
 
