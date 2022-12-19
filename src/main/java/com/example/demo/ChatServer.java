@@ -5,12 +5,7 @@ import java.io.*;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * This is the chat client program.
- * Type 'bye' to terminte the program.
- *
- * @author www.codejava.net
- */
+
 public class ChatServer{
     private int port;
     private Set<String> userNames = new HashSet<>();
@@ -36,6 +31,7 @@ public class ChatServer{
     public void start()  {
         try {
             System.out.println("Chat Server is listening on port " + serverSocket.getLocalPort());
+            System.out.println("Chat Server is also listening on port " + serverSocket2.getLocalPort());
 
             while (!serverSocket.isClosed()) {
                 Socket socket = serverSocket.accept();
@@ -58,7 +54,7 @@ public static void main(String[] args) throws IOException {
     //int port = Integer.parseInt(args[0]);
 
     ServerSocket serverSocket1= new ServerSocket(9080);
-    ServerSocket serverSocket2= new ServerSocket(8080);
+    ServerSocket serverSocket2= new ServerSocket(9070);
     ChatServer  server = new ChatServer(serverSocket1,serverSocket2);
 
     server.start();

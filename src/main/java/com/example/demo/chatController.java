@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 //import static com.example.demo.ClientHand.serverView;
+import static com.example.demo.ClientHand.clientHands;
 import static com.example.demo.ClientHand.serverView;
 import static com.example.demo.client2.client2list;
 import static com.example.demo.client2.objmes;
@@ -82,6 +83,7 @@ public class chatController implements Initializable {
     public static ArrayList<Message> roomList ;
     @FXML
     private ListView<Message> listView2;
+    //client2 me;
 
 
 
@@ -167,12 +169,18 @@ public class chatController implements Initializable {
         //listView.getItems().addAll(serv);
         //roomList.add(new Message(0,"test","testing"));
        // listView.getItems().addAll(serverView.getItems());
+        listView2.getItems().addAll(serverView);
 
 
        // vbox.getChildren().addAll(listView);
         vbox.getChildren().addAll(listView2);
+        serverView.forEach(each -> vbox.getChildren().add(each));
+        //vbox.getChildren().setAll(serverView.);
+        //listView2.refresh();
 
-        //listView2.getItems().forEach(each ->{System.out.print(each.message);});
+
+
+        //serverView.getItems().forEach(each ->{System.out.print(each.message);});
         //refresh();
        // serverView.forEach(each->{System.out.print(each.message);System.out.println("next mess");});
         System.out.println("pass");
@@ -318,18 +326,21 @@ public class chatController implements Initializable {
         System.out.println("connecting");
         Message message = new Message(2,"mary","hope this works");
         Socket socketc =new Socket("localhost",9080);
-        Socket socket2 =new Socket("localhost",8080);
+        System.out.println("connted 1");
+        Socket socket2 =new Socket("localhost",9070);
+        System.out.println("connted 2");
         client2 me = new client2(socketc,"client2", socket2);
+        System.out.println("conn 2");
         me.listen2();
+        System.out.println("conn 3");
         me.listen();
-        me.sendmessage();
+        //me.sendmessage();
         System.out.println("serv conn");
     }
 
     @FXML
     protected void sendmessage(ActionEvent event) throws IOException {
-        se = inmes.getText();
-        inmes.setText("");
+    //me.sendmessage("client2","test send");
 
 
 
@@ -341,6 +352,7 @@ public class chatController implements Initializable {
 
     public  static void print(){
         Text hold = new Text("john");
+
        //Window.getWindows().
         //listView.getItems().add(serverView.getItems().get(0));
         //System.out.println(mes_view.getChildren().get(0));

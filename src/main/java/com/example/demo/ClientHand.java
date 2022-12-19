@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 
 import java.io.*;
@@ -16,11 +17,12 @@ public class ClientHand implements Runnable {
     private String clientusername;
     private ObjectOutputStream objectOutputStream;
     private ObjectInputStream objectInputStream;
-    public static ObservableList<Message> serverView;
+    public static ArrayList<Message> serverView= new ArrayList<>();
 
 
     public ClientHand(Socket socket, Socket socket1) throws IOException {
         try {
+
             this.socket =socket;
             this.socket1=socket1;
             this. bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
@@ -29,7 +31,7 @@ public class ClientHand implements Runnable {
             this.objectInputStream = new ObjectInputStream(socket1.getInputStream());
             this.clientusername = bufferedReader.readLine();
             clientHands.add(this);
-           String ser =  String.format("%s  has entered the chat",clientusername);
+            String ser =  String.format("%s  has entered the chat",clientusername);
             System.out.println(ser);
 //
             serverView.add(new Message(0,"server","has entered the chat"));
@@ -56,7 +58,7 @@ public class ClientHand implements Runnable {
 
     @Override
     public void run() {
-        messouts();
+        //messouts();
     String messagefromc;
 //    while(socket.isConnected()){
 //        try {

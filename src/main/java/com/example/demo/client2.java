@@ -9,6 +9,7 @@ import java.net.Socket;
 import java.util.Objects;
 import java.util.Scanner;
 
+import static com.example.demo.ClientHand.serverView;
 import static com.example.demo.HelloController.*;
 import static com.example.demo.chatController.serv;
 
@@ -43,11 +44,16 @@ public class client2 {
         try {
             this.socket =socket;
             this.socket2 =socket2;
-            this. bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.objectInputStream = new ObjectInputStream(socket2.getInputStream());
+            System.out.println("cl2 obj");
             this.objectOutputStream = new ObjectOutputStream(socket2.getOutputStream());
             this.username=username;
+            bufferedWriter.write(username);
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+            System.out.println("last conn");
 
         } catch (IOException e) {
             closer(socket,bufferedReader,bufferedWriter);
@@ -56,15 +62,13 @@ public class client2 {
         }
     }
 
-    public void sendmessage(){
+    public void sendmessage(String name,String message){
         System.out.println("sendmess");
         try {
-            bufferedWriter.write(username);
-            bufferedWriter.newLine();
-            bufferedWriter.flush();
             Message sen = new Message(3,"",": has connected");
 
-            sen.name=username;
+            sen.name=name;
+            sen.message=message;
             System.out.println(sen.name);
             objectOutputStream.writeObject(sen);
             System.out.println("mess out");
@@ -145,9 +149,12 @@ public class client2 {
                         //objmes= (Message) objectInputStream.readObject();
                         if(messagef != null ){
                             serv.add((Message) messagef);
+                            mes.add(messagef);
+                            serverView.add(messagef);
                             client2list.add((Message) messagef);
                             System.out.println(serv.get(0).message);
                             System.out.println("received");
+
 
                         }}
 
